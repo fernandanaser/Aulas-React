@@ -1,0 +1,42 @@
+instalações:
+formik
+axios
+react icons
+react router dom
+
+apagar itens não usados
+criar routers.js na raiz src
+no index js chama o routers 
+importar react router dom em routers
+criar páginas com jsx (só páginas usam jsx)
+definir a rota das páginas
+criar pasta context e componentes
+criar contexto: AuthContext.js
+	importar context
+	exportar Authcontext e Authprovider junto
+fazer um teste na variável
+importar o Authprovider e oclocar no browserouter
+importar usecontext authcontext na pagina login
+
+formik: importar useformik na page login
+definir valores
+definir onSubmit
+
+retornar o form
+definir os labels e inputs
+	input: id e name obrigatorios
+		type
+
+criar api.js em src e importar axios
+chamar api na page login
+fazer handle login no context
+
+retorna o tokem jwt.io para saber se tá logado
+
+se o login funcionar fazer o localStorage
+	salva informações da url 
+	passa chave e valor
+	salva no localstorage o token que veio da api
+redireciona para pagina usuarios com usenavigate
+
+usar o useState para saber se tá logado ou nao
