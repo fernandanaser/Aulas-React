@@ -8,7 +8,8 @@ import { AuthContext } from "../../context/AuthContext";
 import { useFormik } from "formik";
 
 const Login = () => {
-    const {handleLogin} = useContext(AuthContext);
+    const { handleLogin } = useContext(AuthContext);
+    console.log(handleLogin, "testeee")
     // definir valores
     const formik = useFormik({
         initialValues: {

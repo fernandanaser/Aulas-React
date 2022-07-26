@@ -25,7 +25,7 @@ const AuthProvider = ({children}) => {
             // 	passa chave e valor
             // 	salva no localstorage o token que veio da api
             // redireciona para pagina usuarios com usenavigate
-            const {data} = await api.post("/auth", user);
+            const {data} = await api.post("/auth", user)
             localStorage.setItem("token", data);
             navigate("/usuarios");
             setLogin(true);

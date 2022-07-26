@@ -3,5 +3,5 @@ import axios from "axios";
 
 // definir a baseUrl - swagger
 export default axios.create({
-    baseURL: "https://dbc-pessoa-api.herokuapp.com/auth"
+    baseURL: 'https://dbc-pessoa-api.herokuapp.com/auth'
 })
