@@ -1,19 +1,26 @@
 // Componentes e contexto continuam com .js
-
-// importanto o context:
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { API } from "../api";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 
 // colocar a função em uma variável para facilitar o uso
 const AuthContext = createContext();
 
 const AuthProvider = ({children}) => {
+    const [logado, setLogado] = useState(false);
+    const [loading, setLoading] = useState(true);
+    // const navigate = useNavigate();
 
-    // usar o useState para saber se tá logado ou nao
-    const  [logado, setLogado] = useState(false);
-    const navigate = useNavigate();
+    // ★★ fazer uma função geral para verificar se está logado ★★
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if(token) {
+            API.defaults.headers.common["Authorization"] = token;
+            setLogado(true);
+        }
+        setLoading(false);
+    }, []);
 
     // ★★ fazer handle login em context, try catch ★★
     async function handleLogin(values) {
@@ -25,8 +32,10 @@ const AuthProvider = ({children}) => {
             // redireciona para pagina usuarios com usenavigate
             const {data} = await API.post("/auth", values)
             localStorage.setItem("token", data);
+            API.defaults.headers.common["Authorization"] = data;
             setLogado(true);
-            navigate("/usuarios");
+            // navigate("/usuarios");
+            window.location.href = "/pessoa";
         } catch (error) {
             alert("Usuário ou senha inválidos");
             console.log(error)
@@ -36,7 +45,10 @@ const AuthProvider = ({children}) => {
     // ★★ funcao handleLogout para deslogar para apagar o token ★★
     function handleLogout() {
         localStorage.removeItem("token");
-        navigate("/");
+        API.defaults.headers.common["Authorization"] = undefined;
+        setLogado(false);
+        // navigate("/");
+        window.location.href = "/";
     }
 
     // ★★ função handleSignUp para cadastrar usuario e volta para página de login ★★
@@ -44,14 +56,19 @@ const AuthProvider = ({children}) => {
         try {
             await API.post("/auth/create", values)
             alert("Usuário cadastrado com sucesso!")
-            navigate("/");
+            // navigate("/");
+            window.location.href = "/";
         }catch (error) {
             console.log(error);
         }
     }
 
+    if(loading) {
+        return(<h1>Loading</h1>)
+    }
+
   return (
-    <AuthContext.Provider value={{ handleLogin, handleLogout }}>
+    <AuthContext.Provider value={{ handleLogin, handleLogout, handleSignUp }}>
         {children}
     </AuthContext.Provider>
   )

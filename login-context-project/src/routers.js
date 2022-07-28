@@ -1,24 +1,34 @@
+import { useContext } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
-import { AuthProvider } from "./context/AuthContext";
+import { AuthContext, AuthProvider } from "./context/AuthContext";
 import Endereco from "./pages/Endereco/Endereco";
 import Login from "./pages/Login/Login";
+import NaoEncontrado from "./pages/NaoEncontrado/NaoEncontrado";
 import Pessoas from "./pages/Pessoas/Pessoas";
 import Usuarios from "./pages/Usuarios/Usuarios";
 
 
 const Routers = () => {
+
+    // const { logado } = useContext(AuthContext);
+
     return (
         <BrowserRouter>
             <AuthProvider>
                 <Header />
                 <Routes>
-                    {/* Definindo as rotas de cada página */}
-                    <Route path="/" element={<Login />} />
-                    <Route path="/usuarios" element={<Usuarios />} />
-                    <Route path="/endereco" element={<Endereco />} />
-                    <Route path="/pessoa" element={<Pessoas />}/>
+                    {/* {!logado ?
+                        (<> */}
+                            <Route path="/" element={<Login />} />
+                            <Route path="/usuarios" element={<Usuarios />} />
+                        {/* </>) :
+                        (<> */}
+                            <Route path="/endereco" element={<Endereco />} />
+                            <Route path="/pessoa" element={<Pessoas />} />
+                        {/* </>)};
+                        <Route path="*" element={<NaoEncontrado />}/> */}
                 </Routes>
                 <Footer />
             </AuthProvider>

@@ -1,7 +1,7 @@
 // Páginas agora usando .jsx
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from '../../context/AuthContext';
 
 // Usar yup para validar os campos do form
@@ -17,6 +17,8 @@ const SignupSchema = Yup.object().shape({
 });
 
 const Login = () => {
+    const { handleLogin} = useContext(AuthContext);
+
     // na pagina login ver se tem token ou não para mostrar ou não o button sair
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -25,21 +27,6 @@ const Login = () => {
         }
       }, []);
 
-      
-
-    // const handleLogin = useContext(AuthContext);
-    // console.log(handleLogin, "testeee")
-    // definir valores
-    // const formik = useFormik({
-    //     initialValues: {
-    //         login: "",
-    //         senha: ""
-    //     },
-    //     // definir onsubmit
-    //     onSubmit: values => {
-    //         handleLogin(values);
-    //     }
-    // })
     return (
         <div>
             <h1>Login</h1>
@@ -56,17 +43,19 @@ const Login = () => {
             >
                 {({ errors, touched }) => (
                     <Form>
+                        <label>Nome</label>
                         <Field name="login" />
                         {errors.login && touched.login ? (
                             <div>{errors.login}</div>
                         ) : null}
 
+                        <label>Senha</label>
                         <Field name="senha" type="password"/>
                         {errors.senha && touched.senha ? (
                             <div>{errors.senha}</div>
                         ) : null}
 
-                        <button type="submit">Entrar</button>
+                        <button type="submit" onClick={handleLogin}>Entrar</button>
                     </Form>
                 )}
             </Formik>

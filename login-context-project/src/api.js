@@ -3,7 +3,7 @@ import axios from "axios";
 
 // definir a baseUrl - swagger dbc
 const API = axios.create({
-    baseURL: 'https://dbc-pessoa-api.herokuapp.com/auth'
+    baseURL: 'https://dbc-pessoa-api.herokuapp.com'
 })
 
 export {API};
