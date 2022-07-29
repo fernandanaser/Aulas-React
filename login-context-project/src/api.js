@@ -3,7 +3,11 @@ import axios from "axios";
 
 // definir a baseUrl - swagger dbc
 const API = axios.create({
-    baseURL: 'https://dbc-pessoa-api.herokuapp.com'
+    baseURL: 'https://dbc-pessoa-api.herokuapp.com',
 })
 
-export {API};
+const APICEP = axios.create({
+    baseURL: "https://viacep.com.br/ws",
+})
+
+export {API, APICEP};

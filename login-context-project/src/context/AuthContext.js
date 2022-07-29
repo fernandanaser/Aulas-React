@@ -1,16 +1,12 @@
 // Componentes e contexto continuam com .js
 import { createContext, useEffect, useState } from "react";
 import { API } from "../api";
-// import { useNavigate } from "react-router-dom";
 
-
-// colocar a função em uma variável para facilitar o uso
 const AuthContext = createContext();
 
 const AuthProvider = ({children}) => {
     const [logado, setLogado] = useState(false);
     const [loading, setLoading] = useState(true);
-    // const navigate = useNavigate();
 
     // ★★ fazer uma função geral para verificar se está logado ★★
     useEffect(() => {
@@ -23,14 +19,9 @@ const AuthProvider = ({children}) => {
     }, []);
 
     // ★★ fazer handle login em context, try catch ★★
-    async function handleLogin(values) {
+    async function handleLogin(usuario) {
         try {
-            // se o login funcionar fazer o localStorage
-            // 	salva informações da url 
-            // 	passa chave e valor
-            // 	salva no localstorage o token que veio da api
-            // redireciona para pagina usuarios com usenavigate
-            const {data} = await API.post("/auth", values)
+            const {data} = await API.post("/auth", usuario)
             localStorage.setItem("token", data);
             API.defaults.headers.common["Authorization"] = data;
             setLogado(true);
@@ -52,23 +43,28 @@ const AuthProvider = ({children}) => {
     }
 
     // ★★ função handleSignUp para cadastrar usuario e volta para página de login ★★
-    async function handleSignUp(values) {
+    async function handleSignUp(usuario) {
         try {
-            await API.post("/auth/create", values)
+            await API.post("/auth/create", usuario)
             alert("Usuário cadastrado com sucesso!")
             // navigate("/");
             window.location.href = "/";
         }catch (error) {
             console.log(error);
+            alert(error)
         }
     }
 
-    if(loading) {
-        return(<h1>Loading</h1>)
-    }
+    // // const Loading = () => {
+ 
+    // // }
+
+    // if(loading) {
+    //     return(<h1>Loading</h1>)
+    // }
 
   return (
-    <AuthContext.Provider value={{ handleLogin, handleLogout, handleSignUp }}>
+    <AuthContext.Provider value={{ handleLogin, handleLogout, handleSignUp, logado, setLoading }}>
         {children}
     </AuthContext.Provider>
   )

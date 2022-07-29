@@ -1,18 +1,26 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { API } from "../../api";
-import { Formik, Form, Field } from 'formik';
-import * as Yup from 'yup';
+// import { Formik, Form, Field } from 'formik';
+import { useNavigate } from "react-router-dom";
+import Lista from "../../components/Lista/Lista";
+import { AuthContext } from "../../context/AuthContext";
+// import * as Yup from 'yup';
 
 const Pessoas = () => {
-  console.log("teste2")
-  // ★★ funcao para listar pessoas ★★
+  const {setLoading} = useContext(AuthContext);
+  const navigate = useNavigate();
   const [pessoas, setPessoas] = useState([]);
+
+  // ★★ funcao para listar pessoas ★★
   async function listarPessoas() {
+    setLoading(true);
     try {
       const { data } = await API.get("/pessoa?pagina=0&tamanhoDasPaginas=20");
       setPessoas(data.content);
+      setLoading(false);
     } catch (error) {
       alert(error)
+      setLoading(false)
     }
   }
 
@@ -20,20 +28,21 @@ const Pessoas = () => {
     listarPessoas();
   }, []);
 
-  function handleDelete() {
 
+
+  function handleCreate() {
+    navigate("/cadastrar")
   }
 
-  function handleUpdate() {
-    // setIsUpdate(true)
-  }
-
-  const isUpdate = false;
-  console.log("testando")
+  // const isUpdate = false;
 
   return (
     <div>
-      <h1>Cadastrar pessoa</h1>
+      <button onClick={handleCreate}>Cadastrar</button>
+      <h1>Lista de pessoas</h1>
+      <Lista listaPessoas={pessoas}/>
+      {/* <h1>Cadastrar pessoa</h1>
+      AJUSTAR ESSE FORMIK
       <Formik>
         <Form>
           <Field name="Nome" type="text" placeholder="Nome"/>
@@ -42,17 +51,9 @@ const Pessoas = () => {
           <Field name="E-mail" type="text" placeholder="E-mail"/>
           <button>{isUpdate ? "Atualizar" : "Cadastrar"}</button>
         </Form>
-      </Formik>
+      </Formik> */}
 
-      <h1>Pessoas</h1>
-      {pessoas.map(pessoa => (
-        <div key={pessoa.idPessoa}>
-          <p>Nome: {pessoa.nome}</p>
-          <p>Data de nascimento: {pessoa.dataNascimento}</p>
-          <p>CPF: {pessoa.cpf}</p>
-          <p>E-mail: {pessoa.email}</p>
-        </div>
-      ))}
+
     </div>
   )
 }

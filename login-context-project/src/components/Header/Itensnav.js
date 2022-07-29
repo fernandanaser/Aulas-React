@@ -1,9 +1,11 @@
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const Itensnav = ({name, url}) => {
+const Itensnav = ({ name, url }) => {
     return (
-        <li>{name}</li>
+        <li>
+            <Link to={url}> {name}</Link>
+        </li>
     )
-  }
-  
-  export default Itensnav;
+}
+
+export default Itensnav;

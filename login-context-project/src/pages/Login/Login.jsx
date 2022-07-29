@@ -3,6 +3,9 @@ import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { useContext, useEffect } from "react";
 import { AuthContext } from '../../context/AuthContext';
+import Logo from '../../components/Header/Logo';
+import { LoginContainer } from './Login.styled';
+
 
 // Usar yup para validar os campos do form
 const SignupSchema = Yup.object().shape({
@@ -28,8 +31,12 @@ const Login = () => {
       }, []);
 
     return (
-        <div>
-            <h1>Login</h1>
+        
+        <LoginContainer>
+            <Logo />
+            <h2>Dashboard Kit</h2>
+            <h1>Log In to Dashboard Kit</h1>
+            <small>Enter your email and password below</small>
             <Formik
                 initialValues={{
                     login: '',
@@ -37,53 +44,30 @@ const Login = () => {
                 }}
                 validationSchema={SignupSchema}
                 onSubmit={values => {
-                    // same shape as initial values
-                    console.log(values);
+                    handleLogin(values);
                 }}
             >
                 {({ errors, touched }) => (
                     <Form>
-                        <label>Nome</label>
-                        <Field name="login" />
+                        <label htmlFor="login">USUÁRIO</label>
+                        <Field id="login" name="login" />
                         {errors.login && touched.login ? (
                             <div>{errors.login}</div>
                         ) : null}
 
-                        <label>Senha</label>
-                        <Field name="senha" type="password"/>
+                        <label htmlFor="senha">SENHA</label>
+                        <Field id="senha" name="senha" type="password"/>
                         {errors.senha && touched.senha ? (
                             <div>{errors.senha}</div>
                         ) : null}
 
-                        <button type="submit" onClick={handleLogin}>Entrar</button>
+                        <button type="submit">Log In</button>
                     </Form>
                 )}
             </Formik>
-        </div>
+            <small>Don't have an account? <strong>Sign up</strong></small>
 
-        // retornar o form (com padrão de handlesubmit)
-        // <form onSubmit={formik.handleSubmit}>
-        //     {/* definir os labels e inputs. No input id e name são obrigatórios */}
-        //     <label htmlFor="login">Usuário</label>
-        //     <input
-        //     type="text"
-        //     name="login"
-        //     id="login"
-        //     onChange={formik.handleChange}
-        //     value={formik.values.login}
-        //     />
-
-        //     <label htmlFor="senha">Senha</label>
-        //     <input
-        //     type="password"
-        //     name="senha"
-        //     id="senha"
-        //     onChange={formik.handleChange}
-        //     value={formik.values.senha}
-        //     />
-
-        //     <button type="submit">Entrar</button>
-        // </form>
+        </LoginContainer>
     )
 }
 
