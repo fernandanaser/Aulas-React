@@ -1,5 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { API } from "../api";
+import Loading from "../components/Loading/Loading";
+// import { toast } from "react-hot-toast";
 
 const AuthContext = createContext();
 
@@ -24,10 +26,12 @@ const AuthProvider = ({ children }) => {
             console.log(usuario)
             const { data } = await API.post("/auth", usuario)
             console.log(data)
-            localStorage.setItem("token", data);
-            API.defaults.headers.common["Authorization"] = data;
+            localStorage.setItem("token", data, {
+                headers: {
+                  Authorization: localStorage.getItem("token")
+                }
+            });
             setLogado(true);
-            // navigate("/usuarios");
             window.location.href = "/pessoa";
         } catch (error) {
             alert("Usuário ou senha inválidos");
@@ -37,7 +41,6 @@ const AuthProvider = ({ children }) => {
 
     // ★★ funcao handleLogout para deslogar para apagar o token ★★
     function handleLogout() {
-        console.log("deslogando")
         localStorage.removeItem("token");
         API.defaults.headers.common["Authorization"] = undefined;
         setLogado(false);
@@ -48,11 +51,12 @@ const AuthProvider = ({ children }) => {
     async function handleSignUp(usuario) {
         try {
             await API.post("/auth/create", usuario)
-            alert("Usuário cadastrado com sucesso!")
+            alert("Usuário Cadastrado com sucesso!")
             window.location.href = "/";
         } catch (error) {
-            alert(error)
+            alert(error);
         }
+        setLoading(false)
     }
 
     function goCadastro() {
@@ -67,9 +71,9 @@ const AuthProvider = ({ children }) => {
 
     // }
 
-    // if (loading) {
-    //     return (<h1>Loading</h1>)
-    // }
+    if (loading) {
+        return (<Loading />)
+    }
 
     return (
         <AuthContext.Provider value={{

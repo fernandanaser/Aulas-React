@@ -82,6 +82,7 @@ export const LoginContainer = styled.div`
 
     strong {
         cursor: pointer;
+        color: blue;
     }
 
     strong:hover {
