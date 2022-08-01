@@ -20,7 +20,7 @@ function EnderecoForm() {
 
   return (
     <div>
-        <h1>ff</h1>
+        <h1>Cadastro de endereço</h1>
         {/* <Formik
             initialValues={{
                 // tipo: user ? user.tipo : "",
@@ -184,7 +184,7 @@ function EnderecoForm() {
                         placeholder="País:"
                     />
 
-                    <button type="submit" onClick={alert("oi")}>{isUpdateEndereco ? "Atualizar" : "Cadastrar"}</button>
+                    <button type="submit" onClick={console.log("teste clicando")}>{isUpdateEndereco ? "Atualizar" : "Cadastrar"}</button>
                     </form>
     </div>
   )

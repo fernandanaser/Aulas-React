@@ -55,6 +55,14 @@ const AuthProvider = ({ children }) => {
         }
     }
 
+    function goCadastro() {
+        window.location.href = "/usuarios";
+    }
+
+    function goHome() {
+        window.location.href = "/";
+    }
+
     // const Loading = () => {
 
     // }
@@ -69,7 +77,9 @@ const AuthProvider = ({ children }) => {
             handleLogout,
             handleSignUp,
             setLoading,
-            logado
+            logado,
+            goCadastro,
+            goHome
         }}>
             {children}
         </AuthContext.Provider>

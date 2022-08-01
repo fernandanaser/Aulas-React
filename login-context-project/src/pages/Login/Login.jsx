@@ -5,8 +5,6 @@ import { useContext } from "react";
 import { AuthContext } from '../../context/AuthContext';
 import Logo from '../../components/Header/Logo';
 import { LoginContainer, Background, Divform, Required, Fieldform } from './Login.styled';
-import { Link } from 'react-router-dom';
-
 
 // Usar yup para validar os campos do form
 const SignupSchema = Yup.object().shape({
@@ -21,7 +19,7 @@ const SignupSchema = Yup.object().shape({
 });
 
 const Login = () => {
-    const { handleLogin, handleSignUp } = useContext(AuthContext);
+    const { handleLogin, goCadastro } = useContext(AuthContext);
 
     return (
         <Background>
@@ -62,10 +60,7 @@ const Login = () => {
                         </Form>
                     )}
                 </Formik>
-                <Link to="/usuarios"><p>Cadastrar</p></Link>
-                <small>Ainda não possui cadastro? <strong onClick={<Link to="/usuarios"></Link>}>Cadastrar</strong></small>
-                <Link to="/usuarios">Cadastrar</Link>
-
+                <small>Ainda não possui cadastro? <strong onClick={goCadastro}>Cadastrar</strong></small>
             </LoginContainer>
         </Background>
     )

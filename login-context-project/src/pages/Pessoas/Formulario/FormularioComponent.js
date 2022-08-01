@@ -13,6 +13,7 @@ const FormularioComponent = ({ isUpdate, pessoas, id }) => {
     }
 
     return (
+        
         <Formik
             initialValues={{
                 nome: user ? user.nome : "",

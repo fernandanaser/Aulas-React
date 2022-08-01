@@ -6,7 +6,7 @@ const Endereco = () => {
 
 return (
 	<div>
-		<h1>teste endereço</h1>
+		<h1>Cadastro de endereço</h1>
 		<button onClick={handleCreateEndereco}>Cadastrar</button>
 	</div>
 )
