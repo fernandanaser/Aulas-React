@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom/client';
 import { AuthProvider } from './context/AuthContext';
+import { EnderecoProvider } from './context/EnderecoContext';
 import { PessoasProvider } from './context/PessoasContext';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
@@ -9,7 +10,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <AuthProvider>
         <PessoasProvider>
-            <Routers />
+            <EnderecoProvider>
+                <Routers />
+            </EnderecoProvider>
         </PessoasProvider>
     </AuthProvider>
 );

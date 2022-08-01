@@ -1,56 +1,28 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { API } from "../../api";
-import { Formik } from "formik";
+import { PessoasContext } from "../../context/PessoasContext";
+import FormularioComponent from "./Formulario/FormularioComponent";
 
 function PessoaForm() {
   const { id } = useParams();
-  const [pessoas, setPessoas] = useState();
+  const {pessoa, getPessoaById} = useContext(PessoasContext);
   const [isUpdate, setIsUpdate] = useState();
 
   async function listar() {
     if (id) {
-      setIsUpdate(true)
-    }
-    try {
-      const { data } = await API.get(`/pessoa/lista-completa?idPessoa=${id}`)
-      setPessoas(data)
-    } catch (error) {
-      console.log(error)
-      alert(error)
+      setIsUpdate(true);
+      getPessoaById(id);
     }
   }
 
   useEffect(() => {
     listar();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
-    // importar as máscaras
     <div>
-      <Formik
-        initialValues={{ nome: "" }}
-        onSubmit={(values, actions) => {
-          // fazer um ternário
-        }}>
-
-        {props => (
-          <form onSubmit={props.handleSubmit}>
-            <input type="text"
-              onChange={props.handleChange}
-              onBlur={props.handleBlur}
-              value={props.values.name}
-              name="name"
-            />
-
-            {props.errors.name &&
-              <div id="feedback">{props.errors.name}</div>}
-
-            <button type="submit">{isUpdate ? "Atualizar" : "Cadastrar"}</button>
-          </form>
-        )}
-
-      </Formik>
+      <FormularioComponent isUpdate={isUpdate} pessoas={pessoa} id={id} />
     </div>
   )
 }

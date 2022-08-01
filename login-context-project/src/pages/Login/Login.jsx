@@ -1,10 +1,11 @@
 // Páginas agora usando .jsx
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { AuthContext } from '../../context/AuthContext';
 import Logo from '../../components/Header/Logo';
-import { LoginContainer } from './Login.styled';
+import { LoginContainer, Background, Divform, Required, Fieldform } from './Login.styled';
+import { Link } from 'react-router-dom';
 
 
 // Usar yup para validar os campos do form
@@ -20,54 +21,53 @@ const SignupSchema = Yup.object().shape({
 });
 
 const Login = () => {
-    const { handleLogin} = useContext(AuthContext);
-
-    // na pagina login ver se tem token ou não para mostrar ou não o button sair
-    useEffect(() => {
-        const token = localStorage.getItem("token");
-        if(!token) {
-
-        }
-      }, []);
+    const { handleLogin, handleSignUp } = useContext(AuthContext);
 
     return (
-        
-        <LoginContainer>
-            <Logo />
-            <h2>Dashboard Kit</h2>
-            <h1>Log In to Dashboard Kit</h1>
-            <small>Enter your email and password below</small>
-            <Formik
-                initialValues={{
-                    login: '',
-                    senha: '',
-                }}
-                validationSchema={SignupSchema}
-                onSubmit={values => {
-                    handleLogin(values);
-                }}
-            >
-                {({ errors, touched }) => (
-                    <Form>
-                        <label htmlFor="login">USUÁRIO</label>
-                        <Field id="login" name="login" />
-                        {errors.login && touched.login ? (
-                            <div>{errors.login}</div>
-                        ) : null}
+        <Background>
+            <LoginContainer>
+                <Logo />
+                <h2>Dashboard Kit</h2>
+                <h1>Acessar Dashboard</h1>
+                <small>Insira seu usuário e senha abaixo</small>
+                <Formik
+                    initialValues={{
+                        login: '',
+                        senha: '',
+                    }}
+                    validationSchema={SignupSchema}
+                    onSubmit={values => {
+                        handleLogin(values);
+                    }}
+                >
+                    {({ errors, touched }) => (
+                        <Form>
+                            <Divform>
+                                <label htmlFor="login">USUÁRIO</label>
 
-                        <label htmlFor="senha">SENHA</label>
-                        <Field id="senha" name="senha" type="password"/>
-                        {errors.senha && touched.senha ? (
-                            <div>{errors.senha}</div>
-                        ) : null}
+                                <Fieldform id="login" name="login" placeholder="Usuário" />
+                                {errors.login && touched.login ? (
+                                    <Required>{errors.login}</Required>
+                                ) : null}
 
-                        <button type="submit">Log In</button>
-                    </Form>
-                )}
-            </Formik>
-            <small>Don't have an account? <strong>Sign up</strong></small>
+                                <label htmlFor="senha">SENHA</label>
 
-        </LoginContainer>
+                                <Fieldform id="senha" name="senha" type="password" placeholder="Senha" />
+                                {errors.senha && touched.senha ? (
+                                    <Required>{errors.senha}</Required>
+                                ) : null}
+
+                                <button type="submit">Log In</button>
+                            </Divform>
+                        </Form>
+                    )}
+                </Formik>
+                <Link to="/usuarios"><p>Cadastrar</p></Link>
+                <small>Ainda não possui cadastro? <strong onClick={<Link to="/usuarios"></Link>}>Cadastrar</strong></small>
+                <Link to="/usuarios">Cadastrar</Link>
+
+            </LoginContainer>
+        </Background>
     )
 }
 
