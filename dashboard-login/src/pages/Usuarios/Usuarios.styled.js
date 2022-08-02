@@ -97,7 +97,7 @@ export const Fieldform = styled(Field)`
         margin-bottom: 24px;
         background-color: #FCFDFE;
         border-radius: 8px;
-        border: 1px solid #6f7491;
+        border: 1px solid #F0F1F7;
         font-weight: 400;
         font-size: 14px;
         line-height: 20px;

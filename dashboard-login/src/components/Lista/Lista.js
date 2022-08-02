@@ -1,10 +1,11 @@
 import { useContext } from "react";
-import { EnderecoContext } from "../../context/EnderecoContext";
+// import { EnderecoContext } from "../../context/EnderecoContext";
 import { PessoasContext } from "../../context/PessoasContext";
 import { ContainerLista, CardLista } from "./Lista.styled";
 
 const Lista = ({listaPessoas}) => {
     const { handleDeletePessoa, goUpdate } = useContext(PessoasContext);
+    // const {goEndereco} = useContext(EnderecoContext);
 
     return (
         <ContainerLista>
@@ -17,7 +18,9 @@ const Lista = ({listaPessoas}) => {
                     <p>E-mail: {item.email}</p>
                     <button onClick={() => goUpdate(item.idPessoa)}>Atualizar</button>
                     <button onClick={() => handleDeletePessoa(item.idPessoa)}>Excluir</button>
-                    <button onClick={() => goEndereco(item.idPessoa)}>Cadastrar endereço</button>
+                    {/* <button onClick={() => goEndereco(item.idPessoa)}>Cadastrar endereço</button> */}
+                    <button onClick={() => alert(item.idPessoa)}>Cadastrar endereço</button>
+
                 </div>
             ))}
             </CardLista>
