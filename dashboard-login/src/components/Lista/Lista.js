@@ -7,8 +7,8 @@ import usuario from "./usuario.png"
 const Lista = ({ listaPessoas }) => {
     const { handleDeletePessoa, goUpdate } = useContext(PessoasContext);
 
-    function goEndereco() {
-        window.location.href = "/endereco";
+    function goEndereco(idPessoa) {
+        window.location.href = `/endereco/${idPessoa}`;
     }
 
     return (

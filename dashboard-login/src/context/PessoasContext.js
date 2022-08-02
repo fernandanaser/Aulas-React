@@ -86,9 +86,20 @@ function PessoasProvider({ children }) {
     // ⮞⮞⮞ CRUD ENDEREÇO ⮜⮜⮜
 
     // ★★★ POST: create ★★★
-    async function handleCreateEndereco(idPessoa) {
+    async function handleCreateEndereco(endereco) {
+        //TODO como pegar o idPessoa da pag anterior via parametro?
+        const myArray = window.location.href.split("/");
+        console.log(myArray)
+        let idPessoa = myArray[myArray.length-1]
+        
+        
+        //TODO pegar do radioButton
+        endereco.tipo = "COMERCIAL";
+        
+        //let idPessoa = 663;
+        console.log(idPessoa)
         try {
-            const { data } = await API.post(`/endereco/{idPessoa}?idPessoa=${idPessoa}`, {
+            const { data } = await API.post(`/endereco/{idPessoa}?idPessoa=${idPessoa}`, endereco, {
                 headers: {
                   Authorization: localStorage.getItem("token")
                 }

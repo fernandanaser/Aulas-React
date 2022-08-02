@@ -10,7 +10,7 @@ function Aside() {
     const {handleLogout, goHome} = useContext(AuthContext)
     return (
         <Asidehome>
-            <div>
+            <div onClick={goHome}>
                 <Link to="/"><img width="50" src={cat} alt="logo" /></Link>
                 <h2>Dashboard</h2>
             </div>

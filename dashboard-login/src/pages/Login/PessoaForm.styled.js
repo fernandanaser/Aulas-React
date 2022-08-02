@@ -53,7 +53,6 @@ export const Background = styled.body`
         margin-left: 20px;
         display: grid;
         grid-template-columns: 350px 263px 270px 230px 70px;
-
         padding: 20px 10px;
     }
     div:nth-child(3) div {

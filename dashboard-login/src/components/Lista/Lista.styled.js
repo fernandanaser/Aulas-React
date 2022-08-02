@@ -18,7 +18,6 @@ export const ContainerLista = styled.div`
 export const ItensCard = styled.div`
     width: 75vw;
     display: grid;
-    grid-template-columns: 1fr 10fr 3fr 3fr 3fr 3fr;
     gap: 30px;
     margin: 0 auto;
     padding: 0;
@@ -34,6 +33,7 @@ export const ItensCard = styled.div`
 
     p {
         width: 180px;
+        color: #252733;
     }
 
 `
