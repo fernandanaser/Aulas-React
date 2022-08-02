@@ -2,9 +2,9 @@ import { Form, Formik, useFormik } from "formik";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
-import Logo from "../../components/Header/Logo";
 import * as Yup from 'yup';
 import { LoginContainer, Background, Divform, Required, Fieldform } from './Usuarios.styled';
+import Logo from "../../components/Logo/Logo";
 
 const SignupSchema = Yup.object().shape({
   nome: Yup.string()
@@ -20,6 +20,10 @@ const SignupSchema = Yup.object().shape({
 const Usuarios = () => {
   const { handleSignUp, goHome } = useContext(AuthContext);
 
+  function signUp() {
+    handleSignUp()
+  }
+
   return (
       <Background>
           <LoginContainer>
@@ -33,9 +37,7 @@ const Usuarios = () => {
                       senha: '',
                   }}
                   validationSchema={SignupSchema}
-                  onSubmit={values => {
-                      handleSignUp(values);
-                  }}
+                 
               >
                   {({ errors, touched }) => (
                       <Form>
@@ -54,8 +56,8 @@ const Usuarios = () => {
                                   <Required>{errors.senha}</Required>
                               ) : null}
 
-                              <button type="submit" onClick={handleSignUp}>Cadastrar</button>
-                              <button type="submit" onClick={goHome}>Voltar</button>
+                              <button onClick={signUp}>Cadastrar</button>
+                              <button onClick={goHome}>Voltar</button>
                           </Divform>
                       </Form>
                   )}

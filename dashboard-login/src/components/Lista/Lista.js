@@ -1,29 +1,41 @@
 import { useContext } from "react";
 // import { EnderecoContext } from "../../context/EnderecoContext";
 import { PessoasContext } from "../../context/PessoasContext";
-import { ContainerLista, CardLista } from "./Lista.styled";
+import { ContainerLista, ItensCard, Botoes } from "./Lista.styled";
+import usuario from "./usuario.png"
 
-const Lista = ({listaPessoas}) => {
+const Lista = ({ listaPessoas }) => {
     const { handleDeletePessoa, goUpdate } = useContext(PessoasContext);
     // const {goEndereco} = useContext(EnderecoContext);
 
     return (
         <ContainerLista>
-            <CardLista>
+
             {listaPessoas.map(item => (
                 <div key={item.idPessoa}>
-                    <p>Nome: {item.nome}</p>
-                    <p>Data de nascimento: {item.dataNascimento}</p>
-                    <p>CPF: {item.cpf}</p>
-                    <p>E-mail: {item.email}</p>
-                    <button onClick={() => goUpdate(item.idPessoa)}>Atualizar</button>
-                    <button onClick={() => handleDeletePessoa(item.idPessoa)}>Excluir</button>
-                    {/* <button onClick={() => goEndereco(item.idPessoa)}>Cadastrar endereço</button> */}
-                    <button onClick={() => alert(item.idPessoa)}>Cadastrar endereço</button>
-
+                    <ItensCard>
+                        <div>
+                            <img width="44px" src={usuario} alt="Usuário" />
+                            <p>{item.nome}</p>
+                        </div>
+                        <div>
+                            <p>{item.dataNascimento}</p>
+                        </div>
+                        <div>
+                            <p>{item.cpf}</p>
+                        </div>
+                        <div>
+                            <p>{item.email}</p>
+                        </div>
+                        <Botoes>
+                            <button onClick={() => goUpdate(item.idPessoa)}>Atualizar</button>
+                            <button onClick={() => handleDeletePessoa(item.idPessoa)}>Excluir</button>
+                            {/* <button onClick={() => goEndereco(item.idPessoa)}>Cadastrar endereço</button> */}
+                            <button onClick={() => alert(item.idPessoa)}>Cadastrar endereço</button>
+                        </Botoes>
+                    </ItensCard>
                 </div>
             ))}
-            </CardLista>
         </ContainerLista>
     )
 }

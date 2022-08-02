@@ -1,6 +1,6 @@
 import Lista from "../../components/Lista/Lista";
 import { FaSistrix, FaBell, FaSortAmountUp, FaFilter } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Aside from "../../components/Aside/Aside";
 import { Background, HeaderPessoas, PaginaHome, DivImg, BoxPessoas, Toptitulo } from "./Home.styled";
 import usuario from "./usuario.png"
@@ -10,6 +10,7 @@ import { PessoasContext } from "../../context/PessoasContext";
 
 
 function Home() {
+    const { getPessoas, pessoas } = useContext(PessoasContext)
     // const {  pessoas } = useContext(PessoasContext);
     const navigate = useNavigate();
 
@@ -17,6 +18,14 @@ function Home() {
     function goCadastrar() {
       navigate("/cadastrar");
     }
+
+    // Listar
+    async function setup() {
+        getPessoas();
+      }
+      useEffect(() => {
+        setup();
+      }, []);
 
     return (
         <>
@@ -48,15 +57,16 @@ function Home() {
                         </div>
                         <Toptitulo>
                             <p>Nome</p>
-                            <p>Cidade</p>
-                            <p>E-mail</p>
                             <p>Data de Nascimento</p>
-                            <p>Ação</p>
+                            <p>CPF</p>
+                            <p>E-mail</p>
+                            <p> Ação</p>
                         </Toptitulo>
 
                         {/* Aqui vai a listagem das pessoas */}
+                        {/* { <Lista listaPessoas={getPessoas()} /> } */}
                         {/* <Lista listaPessoas={pessoas} /> */}
-                        {/* <Lista listaPessoas={pessoas} /> */}
+                        <Lista listaPessoas={pessoas} />
 
 
                     </BoxPessoas>

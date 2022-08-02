@@ -1,42 +1,66 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { PessoasContext } from "../../context/PessoasContext";
+import { Background, HeaderPessoas, PaginaHome, DivImg, BoxPessoas, Toptitulo } from "./PessoaForm.styled";
+import { FaSistrix, FaBell, FaSortAmountUp, FaFilter } from "react-icons/fa";
 
 import { Formik } from "formik";
 import moment from "moment";
-import { mascaraCPF, mascaraData } from "../../../utils/mascaras";
+import { mascaraCPF, mascaraData } from "../../mascaras";
+import Aside from "../../components/Aside/Aside";
 
 function PessoaForm() {
-
-  const { id } = useParams();
-  const {getPessoaById} = useContext(PessoasContext);
-  const [isUpdate, setIsUpdate] = useState();
-
-  const { handleCreatePessoa, handleUpdatePessoa } = useContext(PessoasContext);
-
-
-  async function listar() {
-    if (id) {
-      setIsUpdate(true);
-      getPessoaById(id);
+    const { id } = useParams();
+    const {pessoa, getPessoaById, handleCreatePessoa, handleUpdatePessoa} = useContext(PessoasContext);
+    const [isUpdate, setIsUpdate] = useState();
+  
+    async function listar() {
+      if (id) {
+        setIsUpdate(true);
+        getPessoaById(id);
+      }
     }
-  }
+  
+    useEffect(() => {
+      listar();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+  
+    return (
+        <>
+        <>
+            <PaginaHome>
+                <Aside />
+                <Background>
+                    <HeaderPessoas>
+                        <div>
+                            <h1>Pessoa</h1>
+                        </div>
+                        <div>
+                            <FaSistrix />
+                            <FaBell />
+                            <h3>Usuário</h3>
+                        </div>
+                    </HeaderPessoas>
+                    <BoxPessoas>
+                        <div>
+                            <h3>Insira os dados abaixo</h3>
+                        </div>
+                        <Toptitulo>
+                            <p>Nome</p>
+                            <p>Data de Nascimento</p>
+                            <p>CPF</p>
+                            <p>E-mail</p>
+                            <p> Ação</p>
+                        </Toptitulo>
 
-  useEffect(() => {
-    listar();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
 
-  return (
-    <div>
-      <h1>Atualizar ou Cadastrar</h1>
-      {/* <FormularioComponent isUpdate={isUpdate} pessoas={pessoa} id={id} /> */}
-
-      <Formik
+                        <div>        
+        { <Formik
             initialValues={{
                 nome: "",
                 dataNascimento: "",
-                cpf: "",
+                cpf:"",
                 email: "",
             }}
             onSubmit={(values, actions) => {
@@ -98,8 +122,19 @@ function PessoaForm() {
                     <button type="submit">{isUpdate ? "Atualizar" : "Cadastrar"}</button>
                 </form>
             )}
-        </Formik>
-    </div>
-  )
-}
-export default PessoaForm;
+        </Formik> }
+      </div>
+
+                    </BoxPessoas>
+                </Background>
+            </PaginaHome>
+        </>
+
+
+
+
+
+      </>
+    )
+  }
+  export default PessoaForm;

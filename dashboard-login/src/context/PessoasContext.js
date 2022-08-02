@@ -21,7 +21,7 @@ function PessoasProvider({ children }) {
             const { data } = await API.post(`/pessoa`, usuario);
             console.log(data)
             alert("Usuário Cadastrado com sucesso!")
-            window.location.href = "/pessoa";
+            window.location.href = "/home";
         } catch (error) {
             alert(error)
         }
@@ -30,6 +30,7 @@ function PessoasProvider({ children }) {
     // ★★★ GET: read ★★★
     async function getPessoas() { // lista completa de pessoas
         try {
+            console.log("entrou get pessoas")
             const { data } = await API.get("/pessoa?pagina=0&tamanhoDasPaginas=20", {
                 headers: {
                     Authorization: localStorage.getItem("token") //the token is a variable which holds the token
@@ -63,7 +64,7 @@ function PessoasProvider({ children }) {
                     Authorization: localStorage.getItem("token") //the token is a variable which holds the token
                 }
             })
-            window.location.href = "/pessoa"
+            window.location.href = "/home"
         } catch (error) {
             alert(error)
         }

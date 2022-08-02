@@ -102,8 +102,8 @@ export const Fieldform = styled(Field)`
         font-size: 14px;
         line-height: 20px;
         letter-spacing: 0.3px;
-        color: #4B506D;
-        opacity: 0.4;
+        color: #0f0d0d;
+        opacity: 0.8;
         display: flex;
         align-items: center;
 `

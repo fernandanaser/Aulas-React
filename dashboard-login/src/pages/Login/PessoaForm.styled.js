@@ -4,6 +4,7 @@ export const Background = styled.body`
     background-color: #F7F8FC;
     margin: 0;
     display: block;
+    height: 100vh;
     button {
         margin: 0px 32px 24px 32px;
         width: 150px;
@@ -17,6 +18,33 @@ export const Background = styled.body`
 
     button:hover {
         background-color: #1a2ca5
+    }
+
+    input {
+        box-sizing: border-box;
+        height: 42px;
+        margin-bottom: 24px;
+        background-color: #FCFDFE;
+        border-radius: 8px;
+        border: 1px solid #6f7491;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: 0.3px;
+        color: #0f0d0d;
+        opacity: 0.8;
+        display: flex;
+        align-items: center;
+        padding-left: 10px;
+        margin-right: 20px;
+    }
+
+    form {
+        margin-left: 20px;
+        display: grid;
+        grid-template-columns: 350px 263px 270px 230px 70px;
+
+        padding: 20px 10px;
     }
 `
 

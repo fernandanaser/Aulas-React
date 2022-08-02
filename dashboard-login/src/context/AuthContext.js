@@ -28,7 +28,7 @@ const AuthProvider = ({ children }) => {
             API.defaults.headers.common["Authorization"] = data;
             setLogado(true);
             // navigate("/usuarios");
-            window.location.href = "/pessoa";
+            window.location.href = "/home";
         } catch (error) {
             alert("Usuário ou senha inválidos");
             console.log(error)
@@ -46,12 +46,18 @@ const AuthProvider = ({ children }) => {
 
     // ★★ função handleSignUp para cadastrar usuario e volta para página de login ★★
     async function handleSignUp(usuario) {
+        let nomeInput = document.getElementById("nomeUsuario").value;
+        let senhaInput = document.getElementById("senha").value;
+        let inputJson = {
+            login : nomeInput,
+            senha : senhaInput
+        }
         try {
-            await API.post("/auth/create", usuario)
+            await API.post("/auth/create", inputJson)
             alert("Usuário cadastrado com sucesso!")
             window.location.href = "/";
         } catch (error) {
-            alert(error)
+            alert(error.response.data.message)
         }
     }
 
@@ -60,7 +66,7 @@ const AuthProvider = ({ children }) => {
     }
 
     function goHome() {
-        window.location.href = "/";
+        window.location.href = "/home";
     }
 
     // const Loading = () => {

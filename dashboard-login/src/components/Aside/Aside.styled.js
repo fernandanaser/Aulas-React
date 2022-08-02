@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const Asidehome = styled.aside`
     background-color: #363740;
     width: 255px;
-    height: 100vh;
     
     div:first-child {
         display: flex;
