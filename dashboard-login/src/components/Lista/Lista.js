@@ -6,7 +6,10 @@ import usuario from "./usuario.png"
 
 const Lista = ({ listaPessoas }) => {
     const { handleDeletePessoa, goUpdate } = useContext(PessoasContext);
-    // const {goEndereco} = useContext(EnderecoContext);
+
+    function goEndereco() {
+        window.location.href = "/endereco";
+    }
 
     return (
         <ContainerLista>
@@ -30,8 +33,7 @@ const Lista = ({ listaPessoas }) => {
                         <Botoes>
                             <button onClick={() => goUpdate(item.idPessoa)}>Atualizar</button>
                             <button onClick={() => handleDeletePessoa(item.idPessoa)}>Excluir</button>
-                            {/* <button onClick={() => goEndereco(item.idPessoa)}>Cadastrar endereço</button> */}
-                            <button onClick={() => alert(item.idPessoa)}>Cadastrar endereço</button>
+                            <button onClick={() => goEndereco(item.idPessoa)}>Cadastrar endereço</button>
                         </Botoes>
                     </ItensCard>
                 </div>

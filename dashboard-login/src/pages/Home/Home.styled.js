@@ -4,6 +4,7 @@ export const Background = styled.body`
     background-color: #F7F8FC;
     margin: 0;
     display: block;
+    
     button {
         margin: 0px 32px 24px 32px;
         width: 150px;

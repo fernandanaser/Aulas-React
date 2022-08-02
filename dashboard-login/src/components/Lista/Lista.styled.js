@@ -12,6 +12,7 @@ export const ContainerLista = styled.div`
     padding: 0;
     justify-content: center;
 
+
 `
 
 export const ItensCard = styled.div`
@@ -52,40 +53,35 @@ export const Botoes = styled.div`
     display: flex;
     justify-content: center;
     button {
-        width: 85px;
-    margin: 2px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+        width: 85px !important;
+        margin: 2px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
+
     button:first-child {
         background-color: #FEC400;
-        width: 85px;
-        height: 40px;
         border-radius: 2em;
         padding: 5px;
         :hover{
-            background-color: #c5a84884;
+            background-color: #a18a3b
         }
     }
     button:nth-child(2) {
         background-color: #F12B2C;
-        width: 85px;
-        height: 40px;
         border-radius: 2em;
         padding: 5px;
         :hover {
-            background-color: #f12b2b81;
+            background-color: #d13535
         }
     }
     button:nth-child(3) {
         background-color: #29CC97;
-        width: 85px;
-        height: 40px;
         border-radius: 2em;
         padding: 5px;
         :hover {
-            background-color: #29cc968b;
+            background-color: #22aa7d;
         }
     }
 `

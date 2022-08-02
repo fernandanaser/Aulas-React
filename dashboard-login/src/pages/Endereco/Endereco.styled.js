@@ -7,12 +7,17 @@ export const Background = styled.body`
     height: 100vh;
     button {
         margin: 0px 32px 24px 32px;
-        width: 80px;
+        width: 100px;
         height: 48px;
         color: #fff;
+        background-color: #3751FF;
         border-radius: 8px;
         border: none;
         cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #1a2ca5
     }
 
     button:first-child {
@@ -47,19 +52,31 @@ export const Background = styled.body`
         align-items: center;
         padding-left: 10px;
         margin-right: 20px;
+        width: 40%;
     }
 
     form {
         margin-left: 20px;
-        display: grid;
-        grid-template-columns: 350px 263px 270px 230px 70px;
-
+        display: flex;
+        flex-direction: column;
         padding: 20px 10px;
+        align-items: center;
     }
     div:nth-child(3) div {
         display: flex;
         justify-content: space-between;
         margin: auto;
+    }
+
+    label {
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 15px;
+        letter-spacing: 0.3px;
+        text-transform: uppercase;
+        color: #9FA2B4;
+        margin-bottom: 10px;
+
     }
 `
 
@@ -143,6 +160,9 @@ export const BoxPessoas = styled.div`
         line-height: 24px;
         letter-spacing: 0.4px;
         color: #252733;
+        display: flex;
+        align-self: center;
+        margin: 20px auto;
     }
     svg {
         color: #C5C7CD;
@@ -157,19 +177,17 @@ export const BoxPessoas = styled.div`
         color: #4B506D;
     }
 `
-export const Toptitulo = styled.div`
-    display: grid;
-    grid-template-columns: 320px 235px 235px 230px 70px;
-    gap: 30px;
-    padding: 0 32px 10px 32px;
-    border-bottom: 1px solid #DFE0EB;
-    p {
-        text-align: left;
-        font-weight: 700;
-        font-size: 14px;
-        line-height: 18px;
-        letter-spacing: 0.2px;
-        color: #9FA2B4;
-    }
 
+export const Radio = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 400px;
+    justify-content: baseline;
+
+    div {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+    }
 `

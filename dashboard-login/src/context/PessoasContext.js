@@ -7,6 +7,8 @@ function PessoasProvider({ children }) {
 
     const [pessoas, setPessoas] = useState([]);
     const [pessoa, setPessoa] = useState();
+    const [endereco, setEndereco] = useState();
+
 
     // ★★★ NAVEGAÇÃO ★★★
     function goUpdate(idPessoa) {
@@ -81,6 +83,66 @@ function PessoasProvider({ children }) {
         }
     };
 
+    // ⮞⮞⮞ CRUD ENDEREÇO ⮜⮜⮜
+
+    // ★★★ POST: create ★★★
+    async function handleCreateEndereco(idPessoa) {
+        try {
+            const { data } = await API.post(`/endereco/{idPessoa}?idPessoa=${idPessoa}`, {
+                headers: {
+                  Authorization: localStorage.getItem("token")
+                }
+            });
+            alert("Endereço cadastrado com sucesso!");
+            window.location.href = "/endereco"
+            console.log(data)
+        } catch (error) {
+            alert(error)
+        }
+    }
+
+    // ★★★ GET: read ★★★    
+    async function getEndereco(idEndereco) {
+        try {
+            const { data } = await API.get(`/endereco/${idEndereco}`, {
+                headers: {
+                      Authorization: localStorage.getItem("token")
+                    }
+                })
+                setEndereco(data);
+            } catch (error) {
+                alert(error);
+            }
+        }
+    
+
+        // ★★★ PUT: update ★★★
+        async function handleUpdateEndereco(usuario, id) {
+            console.log("entrou handleUpdateEndereco")
+            try {
+                await API.put(`/endereco/${id}`, usuario, {
+                    headers: {
+                      Authorization: localStorage.getItem("token")
+                    }
+                })
+                window.location.href = "/endereco"
+            } catch (error) {
+                alert(error)
+            }
+        }
+
+    // ★★★ DELETE: delete ★★★
+    async function handleDeleteEndereco(idPessoa) {
+        try {
+            await API.delete(`/endereco/${idPessoa}`);
+            window.location.href = "/endereco";
+        } catch (error) {
+            alert(error);
+        }
+    };
+
+
+
     return (
         <PessoasContext.Provider value={{
             handleCreatePessoa,
@@ -90,7 +152,11 @@ function PessoasProvider({ children }) {
             handleDeletePessoa,
             goUpdate,
             pessoas,
-            pessoa
+            pessoa,
+            handleCreateEndereco,
+            getEndereco,
+            handleUpdateEndereco,
+            handleDeleteEndereco
         }}>
             {children}
         </PessoasContext.Provider>
